@@ -13,10 +13,10 @@ creds = json.load(f)
 url = 'https://www.canyon.com/en-de/gravel-bikes/adventure/grizl/grizl-cf-sl-6/2711.html?dwvar_2711_pv_rahmenfarbe=GY%2FBK'
 
 # all urls to scrape
-urls = { '1' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-7/2370.html?dwvar_2370_pv_rahmenfarbe=SR%2FBK',
-         '2' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-7/2370.html?dwvar_2370_pv_rahmenfarbe=GN%2FBK',
-         '3' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-6/2369.html?dwvar_2369_pv_rahmenfarbe=SR%2FBK',
-         '4' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-6/2369.html?dwvar_2369_pv_rahmenfarbe=GN%2FBK',
+urls = { 'g7_sr' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-7/2370.html?dwvar_2370_pv_rahmenfarbe=SR%2FBK',
+         'g7_gn' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-7/2370.html?dwvar_2370_pv_rahmenfarbe=GN%2FBK',
+         'g6_sr' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-6/2369.html?dwvar_2369_pv_rahmenfarbe=SR%2FBK',
+         'g7_gn' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-6/2369.html?dwvar_2369_pv_rahmenfarbe=GN%2FBK',
          '71by' : 'https://www.canyon.com/en-de/gravel-bikes/all-road/grail/grail-7-1by/2707.html?dwvar_2707_pv_rahmenfarbe=SR%2FBK',
         'Grizl_1' : 'https://www.canyon.com/en-de/gravel-bikes/adventure/grizl/grizl-cf-sl-6/2711.html?dwvar_2711_pv_rahmenfarbe=GN%2FBU',
         'Grizl_2' : 'https://www.canyon.com/en-de/gravel-bikes/adventure/grizl/grizl-cf-sl-6/2711.html?dwvar_2711_pv_rahmenfarbe=GY%2FBK'
@@ -40,14 +40,11 @@ def get_results(url):
     return results
 
 
-
-# run for all urls and send alerts
-# for key, value in urls.items():
-#     print(key, value)
-#     result = get_results(url=value)
+for key, value in urls.items():
+    result = get_results(url=value)
+    print(result)
     
 
-# 
 
 text_subtype = 'plain'
 SMTPserver = 'smtp.gmail.com'
@@ -58,12 +55,14 @@ content="""\
 Test message
 """
 
-subject="Sent from Python"
+subject_1 = "Daily Stock Summary"
+subject_2 = "Your Bike is now Available!"
+
 
 try:
     msg = MIMEText(content, text_subtype)
-    msg['Subject']=       subject
-    msg['From']   = sender # some SMTP servers will do this automatically, not all
+    msg['Subject'] = subject
+    msg['From']    = sender # some SMTP servers will do this automatically, not all
 
     conn = SMTP(SMTPserver)
     conn.set_debuglevel(False)
