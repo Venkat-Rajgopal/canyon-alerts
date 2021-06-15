@@ -6,7 +6,7 @@ import os
 import re
 from smtplib import SMTP_SSL as SMTP       # this invokes the secure SMTP protocol (port 465, uses SSL)
 from email.mime.text import MIMEText
-from pprint import pprint
+import pprint
 
 
 f = open('creds.json')
@@ -50,6 +50,12 @@ def send_mail(credentials, message):
 
     subject_1 = "Daily Stock Summary"
     subject_2 = "Your Bike is now Available!"
+
+    pp = pprint.PrettyPrinter(width=41, compact=True)
+    
+    # TODO send to a file and print from the file
+    pp.pprint(str(message), outfile)
+
 
     content = str(message) # message = str(message_content)
 
