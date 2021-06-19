@@ -14,8 +14,10 @@ To run this in background, we need to schedule this in crontab.
 
 Here is an example. Here i activate my virtual environment and run the script and save the log in a txt file. 
 
+
 ```
 55 08 18 6 * cd /home/vra/Projects/canyon/ && /home/vra/Projects/canyon/env/bin/python3 /home/vra/Projects/canyon/canyon/alerts/alerts.py > /tmp/cronlog.txt 2>&1
 ```
 
+If you are not sure with Crontab, [here](https://crontab.guru/) you can debug the execution.
 
